@@ -4,6 +4,12 @@ volumes:
     dados:
 services:
     db:
+        #executar o comando
+        #executar um comando dentro do servico db com o usuário postgres com o comando para listar as base
+        # de dados da instância que está ativa
+        #docker-compose exec db psql -U postgres -c "\l"
+        #executar os scripts contidos em check.sql
+        #docker-compose exec db psql -U postgres -f /scripts/check.sql
         image: postgres:9.6
         
         volumes: 
@@ -15,9 +21,10 @@ services:
             - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
         environment:
             POSTGRES_PASSWORD: email-com-workers
-#executar o comando
-#executar um comando dentro do servico db com o usuário postgres com o comando para listar as base
-# de dados da instância que está ativa
-#docker-compose exec db psql -U postgres -c "\l"
-#executar os scripts contidos em check.sql
-#docker-compose exec db psql -U postgres -f /scripts/check.sql
+    frontend:
+        image: nginx:1.13
+        volumes:
+            - ./web:/usr/share/nginx/html/
+        ports:
+            - 80:80
+        
