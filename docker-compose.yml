@@ -8,4 +8,4 @@ services:
 #executar o comando
 #executar um comando dentro do servico db com o usuário postgres com o comando para listar as base
 # de dados da instância que está ativa
-#docker-compose exec db psql -U postgres -c "\L"
+#docker-compose exec db psql -U postgres -c "\l"
