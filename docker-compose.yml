@@ -1,11 +1,23 @@
 # serve para definir a versão do docker-compose, o set de funcionalidades
 version: '3'
+volumes:
+    dados:
 services:
     db:
         image: postgres:9.6
+        
+        volumes: 
+            #volume de dados
+            - dados:/var/lib/postgresql/data
+            #scripts
+            - ./scripts:/scripts
+            #mapear o scripts de inicialização sql e apontar para entrypoint
+            - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
         environment:
             POSTGRES_PASSWORD: email-com-workers
 #executar o comando
 #executar um comando dentro do servico db com o usuário postgres com o comando para listar as base
 # de dados da instância que está ativa
 #docker-compose exec db psql -U postgres -c "\l"
+#executar os scripts contidos em check.sql
+#docker-compose exec db psql -U postgres -f /scripts/check.sql
