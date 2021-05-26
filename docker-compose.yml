@@ -1,0 +1,11 @@
+# serve para definir a versão do docker-compose, o set de funcionalidades
+version: '3'
+services:
+    db:
+        image: postgres:9.6
+        environment:
+            POSTGRES_PASSWORD: email-com-workers
+#executar o comando
+#executar um comando dentro do servico db com o usuário postgres com o comando para listar as base
+# de dados da instância que está ativa
+#docker-compose exec db psql -U postgres -c "\L"
