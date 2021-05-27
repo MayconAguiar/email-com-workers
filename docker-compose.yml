@@ -59,12 +59,17 @@ services:
         networks:
             - fila
     worker:
-        image: python:3.6
+        #procura dentro da pasta worker o Dockerfile
+        build: worker
         volumes:
             # Worker
             - ./worker:/worker
         working_dir: /worker
-        command: bash ./app.sh
+        #command: bash ./app.sh
+        #não precisa do bash porque o comando será passado como
+        #parâmetro do entrypoint que foi definido
+        #no Dockerfile
+        command: worker.py
         networks:
             - fila
         depends_on:
@@ -74,3 +79,7 @@ services:
         
 # monitorar os logs     
 # docker-compose logs -f -t
+# monitorar os logs do worker     
+# docker-compose logs -f -t worker
+# escalar os serviços
+# docker-compose up -d --scale worker=3

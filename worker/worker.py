@@ -8,7 +8,8 @@ if __name__ == '__main__':
     # pega a referência do redis apontando para máquina 
     # e para a porta que está sendo executado
     r = redis.Redis(host='queue', port=6379, db=0)
-
+    # mensagem para conferir a quantidade de workers definido na scale
+    print("Aguardando mensagem...")
     # laço para consumir as mensagens
     while True:
         # pegar dentro da fila sender 
